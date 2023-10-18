@@ -15,7 +15,7 @@ const getDadosEstado=function(){
     let JSONDados={}
     let filtro='RJ'
     let contador=0
-    loop: while(true){
+    /*loop: while(true){
             if(filtro==estadosCidades.estados[contador].sigla){
                 JSONDados.uf=estadosCidades.estados[contador].sigla
                 JSONDados.descricao=estadosCidades.estados[contador].nome
@@ -23,8 +23,8 @@ const getDadosEstado=function(){
                 JSONDados.regiao=estadosCidades.estados[contador].regiao
                 break loop
             }
-    }
-    return JSONDados
+    }*/
+    
 }
-getDadosEstado()
-//console.log(getListaDeEstados())
+//getDadosEstado()
+console.log(getListaDeEstados())
