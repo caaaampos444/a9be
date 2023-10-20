@@ -31,12 +31,12 @@ const getCapitalEstado=function(){
     let JSONCapital={}
     let filtro='AC'
     let contador=0
-    loop: while(true){
+    while(true){
         if(filtro==estadosCidades.estados[contador].sigla){
             JSONCapital.uf=estadosCidades.estados[contador].sigla
             JSONCapital.descricao=estadosCidades.estados[contador].nome
             JSONCapital.capital=estadosCidades.estados[contador].capital
-            break loop
+            break
         }
         contador++
     }
@@ -45,9 +45,32 @@ const getCapitalEstado=function(){
 const getEstadosRegiao=function(){
     let JSONRegiao={}
     let arrayEstados=[]
-    let filtro='SUL'
+    let filtro='sul'
     let contador=0
+    while(contador<27){
+        if(filtro.toUpperCase()==estadosCidades.estados[contador].regiao.toUpperCase()){
+            let JSONEstados={}
+            JSONEstados.uf=estadosCidades.estados[contador].sigla
+            JSONEstados.nome=estadosCidades.estados[contador].nome
+            arrayEstados.push(JSONEstados)
+        }
+        contador++
+    }
+    JSONRegiao.regiao=filtro.toUpperCase()
+    JSONRegiao.estados=arrayEstados
+    return JSONRegiao
 }
+const getCapitalPais=function(){
+    let JSONCapitais={}
+    let arrayCapitais=[]
+    let contador=0
+    while(contador<27){
+        if(estadosCidades.estados[contador].capital_pais.capital==true||estadosCidades.estados[contador].capital_pais.capital==false){
+            let JSONEstados={}
+        }
+    }
+}
+//console.log(getEstadosRegiao())
 //console.log(getCapitalEstado())
 //console.log(getDadosEstado())
 //console.log(getListaDeEstados())
