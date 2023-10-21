@@ -65,11 +65,51 @@ const getCapitalPais=function(){
     let arrayCapitais=[]
     let contador=0
     while(contador<27){
-        if(estadosCidades.estados[contador].capital_pais.capital==true||estadosCidades.estados[contador].capital_pais.capital==false){
+        if(estadosCidades.estados[contador].capital_pais==true||estadosCidades.estados[contador].capital_pais==false){
             let JSONEstados={}
+            JSONEstados.capital_atual=estadosCidades.estados[contador].capital_atual
+            JSONEstados.uf=estadosCidades.estados[contador].sigla
+            JSONEstados.descricao=estadosCidades.estados[contador].nome
+            JSONEstados.capital=estadosCidades.estados[contador].capital
+            JSONEstados.regiao=estadosCidades.estados[contador].regiao
+            JSONEstados.capital_pais_ano_inicio=estadosCidades.estados[contador].capital_pais.capital
+            arrayCapitais.push(JSONEstados)
         }
+        contador++
     }
+    return arrayCapitais
 }
+const getCidades=function(){
+    let JSONCidades={}
+    let arrayCidades=[]
+    let filtro='AC'
+    let contadorEstados=0
+    let contadorCidades=0
+    loop: while(true){
+        if(filtro==estadosCidades.estados[contadorEstados].sigla){
+            while(arrayCidades.length<estadosCidades.estados[contadorEstados].cidades.length){
+                arrayCidades.push(estadosCidades.estados[contadorEstados].cidades[contadorCidades].nome)
+                contadorCidades++
+            }
+            break loop
+        }
+        contadorEstados++
+    }
+    contadorEstados=0
+    while(true){
+        if(filtro==estadosCidades.estados[contadorEstados].sigla){
+            JSONCidades.uf=estadosCidades.estados[contadorEstados].sigla
+            JSONCidades.descricao=estadosCidades.estados[contadorEstados].nome
+            JSONCidades.quantidade_cidades=estadosCidades.estados[contadorEstados].cidades.length
+            JSONCidades.cidades=arrayCidades
+            break
+        }
+        contadorEstados++
+    }
+    return JSONCidades
+}
+//console.log(getCidades())
+console.log(getCapitalPais())
 //console.log(getEstadosRegiao())
 //console.log(getCapitalEstado())
 //console.log(getDadosEstado())
