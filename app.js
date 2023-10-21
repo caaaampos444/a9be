@@ -1,4 +1,5 @@
 const estadosCidades=require('./modulo/estados_cidades')
+
 const getListaDeEstados=function(){
     let JSONSiglas={}
     let arraySiglas=[]
@@ -11,6 +12,7 @@ const getListaDeEstados=function(){
     JSONSiglas.quantidade=arraySiglas.length
     return JSONSiglas
 }
+
 const getDadosEstado=function(){
     let JSONDados={}
     let filtro='SP'
@@ -27,13 +29,14 @@ const getDadosEstado=function(){
     }
     return JSONDados
 }
+
 const getCapitalEstado=function(){
     let JSONCapital={}
     let filtro='AC'
     let contador=0
     while(true){
-        if(filtro==estadosCidades.estados[contador].sigla){
-            JSONCapital.uf=estadosCidades.estados[contador].sigla
+        if(filtro.toUpperCase()==estadosCidades.estados[contador].sigla.toUpperCase()){
+            JSONCapital.uf=estadosCidades.estados[contador].sigla.toUpperCase()
             JSONCapital.descricao=estadosCidades.estados[contador].nome
             JSONCapital.capital=estadosCidades.estados[contador].capital
             break
@@ -42,10 +45,11 @@ const getCapitalEstado=function(){
     }
     return JSONCapital
 }
+
 const getEstadosRegiao=function(){
     let JSONRegiao={}
     let arrayEstados=[]
-    let filtro='sul'
+    let filtro='NORDESTE'
     let contador=0
     while(contador<27){
         if(filtro.toUpperCase()==estadosCidades.estados[contador].regiao.toUpperCase()){
@@ -60,25 +64,29 @@ const getEstadosRegiao=function(){
     JSONRegiao.estados=arrayEstados
     return JSONRegiao
 }
+
 const getCapitalPais=function(){
     let JSONCapitais={}
     let arrayCapitais=[]
     let contador=0
     while(contador<27){
-        if(estadosCidades.estados[contador].capital_pais==true||estadosCidades.estados[contador].capital_pais==false){
+        if(estadosCidades.estados[contador].capital_pais){
             let JSONEstados={}
-            JSONEstados.capital_atual=estadosCidades.estados[contador].capital_atual
+            JSONEstados.capital_atual=estadosCidades.estados[contador].capital_pais.capital
             JSONEstados.uf=estadosCidades.estados[contador].sigla
             JSONEstados.descricao=estadosCidades.estados[contador].nome
             JSONEstados.capital=estadosCidades.estados[contador].capital
             JSONEstados.regiao=estadosCidades.estados[contador].regiao
-            JSONEstados.capital_pais_ano_inicio=estadosCidades.estados[contador].capital_pais.capital
+            JSONEstados.capital_pais_ano_inicio=estadosCidades.estados[contador].capital_pais.ano_inicio
+            JSONEstados.capital_pais_ano_termino=estadosCidades.estados[contador].capital_pais.ano_fim
             arrayCapitais.push(JSONEstados)
         }
         contador++
     }
-    return arrayCapitais
+    JSONCapitais.capitais=arrayCapitais
+    return JSONCapitais
 }
+
 const getCidades=function(){
     let JSONCidades={}
     let arrayCidades=[]
@@ -108,8 +116,9 @@ const getCidades=function(){
     }
     return JSONCidades
 }
+
 //console.log(getCidades())
-console.log(getCapitalPais())
+//console.log(getCapitalPais())
 //console.log(getEstadosRegiao())
 //console.log(getCapitalEstado())
 //console.log(getDadosEstado())
