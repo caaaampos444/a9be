@@ -17,13 +17,13 @@ const getDadosEstado=function(){
     let JSONDados={}
     let filtro='SP'
     let contador=0
-    loop: while(true){
+    while(true){
         if(filtro==estadosCidades.estados[contador].sigla){
             JSONDados.uf=estadosCidades.estados[contador].sigla
             JSONDados.descricao=estadosCidades.estados[contador].nome
             JSONDados.capital=estadosCidades.estados[contador].capital
             JSONDados.regiao=estadosCidades.estados[contador].regiao
-            break loop
+            break
         }
         contador++
     }
