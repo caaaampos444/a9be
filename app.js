@@ -93,13 +93,13 @@ const getCidades=function(){
     let filtro='AC'
     let contadorEstados=0
     let contadorCidades=0
-    loop: while(true){
+    while(true){
         if(filtro==estadosCidades.estados[contadorEstados].sigla){
             while(arrayCidades.length<estadosCidades.estados[contadorEstados].cidades.length){
                 arrayCidades.push(estadosCidades.estados[contadorEstados].cidades[contadorCidades].nome)
                 contadorCidades++
             }
-            break loop
+            break
         }
         contadorEstados++
     }
