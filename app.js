@@ -21,10 +21,41 @@ app.use((request,response,next)=>{
 app.get('/estados/sigla',cors(),async function(request,response,next){
     let controleEstadosCidades=require('./modulo/funcoes.js')
     let listaEstados=controleEstadosCidades.getListaDeEstados()
-    response.json(listaEstados)
-    response.status(200)
+    if(listaEstados){
+        response.json(listaEstados)
+        response.status(200)
+    }
+    else{
+        response.status(404)
+    }
+})
+
+app.get('/estado/sigla/:uf',cors(),async function(request,response,next){
+    let siglaEstado=request.params.uf
+    let controleDadosEstado=require('./modulo/funcoes.js')
+    let dadosEstado=controleDadosEstado.getDadosEstado(siglaEstado)
+    if(dadosEstado){
+        response.json(dadosEstado)
+        response.status(200)
+    }else{
+        response.status(404)
+        response.json({erro:'Item não encontrado'})
+    }
+})
+
+app.get('/capital/estado',cors(),async function(request,response,next){
+    let siglaEstado=request.query.uf
+    let controleDadosCapital=require('./modulo/funcoes.js')
+    let dadosEstado=controleDadosCapital.getCapitalEstado(siglaEstado)
+    if(dadosEstado){
+        response.json(dadosEstado)
+        response.status(200)
+    }else{
+        response.status(404)
+        response.json({erro:'Item não encontrado'})
+    }
 })
 
 app.listen('8080',function(){
-    console.log('API funcionando!!!')
+    console.log('API no ar!!!')
 })

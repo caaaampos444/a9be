@@ -4,46 +4,61 @@ const getListaDeEstados=function(){
     let JSONSiglas={}
     let arraySiglas=[]
     let contador=0
+    let status=false
     while(contador<27){
         arraySiglas.push(estadosCidades.estados[contador].sigla)
+        status=true
         contador++
     }
     JSONSiglas.uf=arraySiglas
     JSONSiglas.quantidade=arraySiglas.length
-    return JSONSiglas
+    if(status)
+        return JSONSiglas
+    else
+        return false
 }
 
-const getDadosEstado=function(){
+const getDadosEstado=function(uf){
     let JSONDados={}
-    let filtro='SP'
+    let filtro=uf
     let contador=0
+    let status=false
     while(true){
-        if(filtro==estadosCidades.estados[contador].sigla){
+        if(filtro.toUpperCase()==estadosCidades.estados[contador].sigla){
             JSONDados.uf=estadosCidades.estados[contador].sigla
             JSONDados.descricao=estadosCidades.estados[contador].nome
             JSONDados.capital=estadosCidades.estados[contador].capital
             JSONDados.regiao=estadosCidades.estados[contador].regiao
+            status=true
             break
         }
         contador++
     }
-    return JSONDados
+    if(status)
+        return JSONDados
+    else
+        return false
 }
 
-const getCapitalEstado=function(){
+const getCapitalEstado=function(uf){
     let JSONCapital={}
-    let filtro='AC'
+    let filtro=uf
     let contador=0
+    let status=false
     while(true){
         if(filtro.toUpperCase()==estadosCidades.estados[contador].sigla.toUpperCase()){
             JSONCapital.uf=estadosCidades.estados[contador].sigla.toUpperCase()
             JSONCapital.descricao=estadosCidades.estados[contador].nome
             JSONCapital.capital=estadosCidades.estados[contador].capital
+            status=true
             break
         }
         contador++
     }
-    return JSONCapital
+    if(status)
+        return JSONCapital
+    else
+        return false
 }
 
 const getEstadosRegiao=function(){
@@ -122,5 +137,5 @@ const getCidades=function(){
 //console.log(getEstadosRegiao())
 //console.log(getCapitalEstado())
 //console.log(getDadosEstado())
-console.log(getListaDeEstados())
-module.exports={getListaDeEstados}
+//console.log(getListaDeEstados())
+module.exports={getListaDeEstados,getDadosEstado,getCapitalEstado,getCapitalPais,getEstadosRegiao}
